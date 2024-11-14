@@ -1,0 +1,26 @@
+spring:
+  application.name: test-app
+  profiles:
+    default: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?Current_schema=test_schema
+    username: postgres
+    password: password
+    driverClassName: org.postgresql.Driver
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: liquibase/db/db.changelog.master.yaml
+    default-schema: test_schema
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          use_get_generated_keys: true

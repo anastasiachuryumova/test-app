@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: A. Churyumova
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: students
+      changes:
+        - createTable:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                  remarks: "Уникальный идентификатор студента"
+              - column:
+                  name: name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Имя студента"
+              - column:
+                  name: surname
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Фамилия студента"
+              - column:
+                  name: second_name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Отчество студента"
+              - column:
+                  name: student_group
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Группа студента"
+              - column:
+                  name: average_mark
+                  type: real
+                  constraints:
+                    nullable: false
+                  remarks: "Средний балл студента"
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  value: "123e4567-e89b-12d3-a456-426614174009"
+              - column:
+                  name: name
+                  value: "Steve"
+              - column:
+                  name: surname
+                  value: "Storms"
+              - column:
+                  name: second_name
+                  value: "Rey"
+              - column:
+                  name: student_group
+                  value: "BI233"
+              - column:
+                  name: average_mark
+                  value: 3.44

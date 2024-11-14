@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.test.controller.AppControllerTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2024-11-14T14:44:20" hostname="MacBook-Air-Anastasia.local" time="1.425">
+  <properties/>
+  <testcase name="changeStudentSuccess()" classname="ru.test.controller.AppControllerTest" time="1.038"/>
+  <testcase name="deleteStudentThrowsForbidden()" classname="ru.test.controller.AppControllerTest" time="0.031"/>
+  <testcase name="changeStudentThrowEntityNotFound()" classname="ru.test.controller.AppControllerTest" time="0.036"/>
+  <testcase name="getStudentsEmpty()" classname="ru.test.controller.AppControllerTest" time="0.091"/>
+  <testcase name="createStudentSuccess()" classname="ru.test.controller.AppControllerTest" time="0.045"/>
+  <testcase name="changeStudentThrowsForbidden()" classname="ru.test.controller.AppControllerTest" time="0.028"/>
+  <testcase name="getStudentsSuccess()" classname="ru.test.controller.AppControllerTest" time="0.035"/>
+  <testcase name="deleteStudentSuccess()" classname="ru.test.controller.AppControllerTest" time="0.018"/>
+  <testcase name="getStudentsThrowsForbidden()" classname="ru.test.controller.AppControllerTest" time="0.015"/>
+  <testcase name="createStudentThrowsForbidden()" classname="ru.test.controller.AppControllerTest" time="0.014"/>
+  <system-out><![CDATA[17:44:10.191 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [ru.test.controller.AppControllerTest]: AppControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:44:10.882 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration ru.test.NewRestTestApplication for test class ru.test.controller.AppControllerTest
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+2024-11-14T17:44:12.846+03:00  INFO 24566 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : Starting AppControllerTest using Java 17.0.8.1 with PID 24566 (started by anastasiacurumova in /Users/anastasiacurumova/Desktop/test-app)
+2024-11-14T17:44:12.849+03:00  INFO 24566 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : No active profile set, falling back to 1 default profile: "dev"
+2024-11-14T17:44:19.631+03:00  WARN 24566 --- [test-app] [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c1943200-7f13-43fa-87eb-86434076e911
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-14T17:44:19.744+03:00  INFO 24566 --- [test-app] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-14T17:44:20.169+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@50f3ba6a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@319aa9ee, org.springframework.security.web.context.SecurityContextHolderFilter@18b04526, org.springframework.security.web.header.HeaderWriterFilter@1f6c4ae, org.springframework.web.filter.CorsFilter@1d806de6, org.springframework.security.web.csrf.CsrfFilter@35becbd4, org.springframework.security.web.authentication.logout.LogoutFilter@6814262d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2f6f4ac4, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@75b363c3, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@2b9d4b0, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@67c0c90b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@31b6fb14, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@246df37b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f541e67, org.springframework.security.web.access.ExceptionTranslationFilter@b34c7c9, org.springframework.security.web.access.intercept.AuthorizationFilter@6480a063]
+2024-11-14T17:44:20.212+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3006bfb, org.springframework.security.web.context.SecurityContextHolderFilter@75805562, org.springframework.security.web.header.HeaderWriterFilter@2a16d4dc, org.springframework.security.web.authentication.logout.LogoutFilter@241d1052, ru.test.filter.TokenExceptionResolvingFilter@36a58466, ru.test.filter.JwtFilter@7827d7b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@13d984ee, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4fedf908, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fd37449, org.springframework.security.web.access.ExceptionTranslationFilter@5ad0c70a, org.springframework.security.web.access.intercept.AuthorizationFilter@5bb99d1d]
+2024-11-14T17:44:20.419+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-11-14T17:44:20.419+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-11-14T17:44:20.423+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2024-11-14T17:44:20.490+03:00  INFO 24566 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : Started AppControllerTest in 9.045 seconds (process running for 14.959)
+2024-11-14T17:44:21.631+03:00  WARN 24566 --- [test-app] [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<?> ru.test.controller.AppController.changeStudent(java.util.UUID,ru.test.dto.StudentDto,java.security.Principal)]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

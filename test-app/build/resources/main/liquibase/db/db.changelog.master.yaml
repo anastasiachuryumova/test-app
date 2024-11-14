@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/db/changesets/create-table-students.yaml
