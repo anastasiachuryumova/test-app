@@ -1,18 +1,18 @@
 package ru.test.service;
 
-import ru.test.dto.StudentDto;
-import ru.test.model.Student;
+import ru.test.dto.TaskDto;
+import ru.test.model.Task;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface AppService {
 
-    List<Student> getStudents(UUID userId);
+    List<Task> getTasks(String userOrAdmin);
 
-    Student changeStudent(UUID userId, UUID studentId, StudentDto studentDto);
+    Task changeTask(UUID taskId, TaskDto taskDto, String userOrAdmin);
 
-    Student createStudent(UUID userId, StudentDto studentDto);
+    Task createTask(TaskDto taskDto);
 
-    UUID deleteStudent(UUID userId, UUID studentId);
+    Task deleteTask(UUID taskId);
 }

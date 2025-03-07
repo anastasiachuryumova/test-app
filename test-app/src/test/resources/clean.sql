@@ -1,1 +1,1 @@
-DELETE FROM test_schema.students;
+DELETE FROM test_schema.users;

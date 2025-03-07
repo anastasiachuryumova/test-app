@@ -1,70 +1,61 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 2
       author: A. Churyumova
       preConditions:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                tableName: students
+                tableName: users
       changes:
         - createTable:
-            tableName: students
+            tableName: users
             columns:
               - column:
                   name: id
                   type: uuid
                   constraints:
                     primaryKey: true
-                  remarks: "Уникальный идентификатор студента"
+                  remarks: "Уникальный идентификатор пользователя"
               - column:
                   name: name
                   type: varchar(32)
                   constraints:
                     nullable: false
-                  remarks: "Имя студента"
+                  remarks: "Имя пользователя"
               - column:
-                  name: surname
+                  name: email
                   type: varchar(32)
                   constraints:
                     nullable: false
-                  remarks: "Фамилия студента"
+                  remarks: "Электронная почта пользователя"
               - column:
-                  name: second_name
+                  name: password
                   type: varchar(32)
                   constraints:
                     nullable: false
-                  remarks: "Отчество студента"
+                  remarks: "Пароль пользователя"
               - column:
-                  name: student_group
+                  name: status
                   type: varchar(32)
                   constraints:
                     nullable: false
-                  remarks: "Группа студента"
-              - column:
-                  name: average_mark
-                  type: real
-                  constraints:
-                    nullable: false
-                  remarks: "Средний балл студента"
+                  remarks: "Статус пользователя"
         - insert:
-            tableName: students
+            tableName: users
             columns:
               - column:
                   name: id
                   value: "123e4567-e89b-12d3-a456-426614174009"
               - column:
                   name: name
-                  value: "Steve"
+                  value: "John Doe"
               - column:
-                  name: surname
-                  value: "Storms"
+                  name: email
+                  value: "email"
               - column:
-                  name: second_name
-                  value: "Rey"
+                  name: password
+                  value: "password"
               - column:
-                  name: student_group
-                  value: "BI233"
-              - column:
-                  name: average_mark
-                  value: 3.44
+                  name: status
+                  value: "ADMIN"

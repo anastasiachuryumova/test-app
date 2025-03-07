@@ -3,6 +3,7 @@ package ru.test.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.test.dto.StudentDto;
+import ru.test.dto.TaskDto;
 import ru.test.service.AppService;
 
 import java.security.Principal;
@@ -24,35 +25,33 @@ public class AppController {
 
     private final AppService appService;
 
-    @GetMapping("students")
-    public ResponseEntity<?> getStudents(
+    @GetMapping("tasks")
+    public ResponseEntity<?> getTasks(
             Principal principal) {
-        UUID userId = UUID.fromString(principal.getName());
-        return ResponseEntity.ok(appService.getStudents(userId));
+        String userOrAdmin = principal.getName();
+        return ResponseEntity.ok(appService.getTasks(userOrAdmin));
     }
 
-    @PutMapping("student/{studentId}")
-    public ResponseEntity<?> changeStudent(
-            @PathVariable("studentId") UUID studentId,
-            @RequestBody @Valid StudentDto studentDto,
+    @PutMapping("task/{taskId}")
+    public ResponseEntity<?> changeTask(
+            @PathVariable("taskId") UUID taskId,
+            @RequestBody @Valid TaskDto taskDto,
             Principal principal) {
-        UUID userId = UUID.fromString(principal.getName());
-        return ResponseEntity.ok(appService.changeStudent(userId, studentId, studentDto));
+        String userOrAdmin = principal.getName();
+        return ResponseEntity.ok(appService.changeTask(taskId, taskDto, userOrAdmin));
     }
 
-    @PostMapping("student/new")
-    public ResponseEntity<?> createStudent(
-            @RequestBody @Valid StudentDto studentDto,
-            Principal principal) {
-        UUID userId = UUID.fromString(principal.getName());
-        return ResponseEntity.ok(appService.createStudent(userId, studentDto));
+    @PostMapping("task/new")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> createTask (
+            @RequestBody @Valid TaskDto taskDto) {
+        return  ResponseEntity.ok(appService.createTask(taskDto));
     }
 
-    @DeleteMapping ("delete/{studentId}")
-    public ResponseEntity<?> deleteStudent(
-            @PathVariable("studentId") UUID studentId,
-            Principal principal) {
-        UUID userId = UUID.fromString(principal.getName());
-        return ResponseEntity.ok(appService.deleteStudent(userId, studentId));
+    @DeleteMapping ("delete/{taskId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> deleteTask(
+            @PathVariable("taskId") UUID taskId) {
+        return ResponseEntity.ok(appService.deleteTask(taskId));
     }
 }

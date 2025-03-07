@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: A. Churyumova
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: tasks
+      changes:
+        - createTable:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                  remarks: "Уникальный идентификатор задачи"
+              - column:
+                  name: title
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Название задачи"
+              - column:
+                  name: description
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Описание задачи"
+              - column:
+                  name: stat
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Статус задачи"
+              - column:
+                  name: priority
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Приоритет задачи"
+              - column:
+                  name: commentary
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+                  remarks: "Комментарий к задаче"
+              - column:
+                  name: author
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Автор задачи"
+              - column:
+                  name: executor
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                  remarks: "Исполнитель задачи"
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: "123e4567-e89b-12d3-a456-426614174009"
+              - column:
+                  name: title
+                  value: "wish list"
+              - column:
+                  name: description
+                  value: "description"
+              - column:
+                  name: stat
+                  value: "IN_PROGRESS"
+              - column:
+                  name: priority
+                  value: "HIGH"
+              - column:
+                  name: commentary
+                  value: "commentary"
+              - column:
+                 name: author
+                 value: "author"
+              - column:
+                  name: executor
+                  value: "executor"

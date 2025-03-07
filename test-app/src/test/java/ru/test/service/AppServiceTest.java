@@ -9,10 +9,11 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.test.dto.StudentDto;
-import ru.test.mapper.StudentMapper;
-import ru.test.model.Student;
-import ru.test.repo.StudentRepository;
+import ru.test.dto.TaskDto;
+import ru.test.model.Task;
+import ru.test.model.User;
+import ru.test.repo.TaskRepository;
+import ru.test.repo.UserRepository;
 import ru.test.service.impl.AppServiceImpl;
 import ru.test.util.TestData;
 
@@ -21,8 +22,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.shouldHaveThrown;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -32,115 +31,117 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class AppServiceTest {
     @Mock
-    private StudentRepository studentRepository;
-    @Mock
-    private StudentMapper studentMapper;
+    private UserRepository userRepository;
     @Captor
-    private ArgumentCaptor<Student> studentArgumentCaptor;
+    private ArgumentCaptor<User> userArgumentCaptor;
+    @Mock
+    private TaskRepository taskRepository;
+    @Captor
+    private ArgumentCaptor<Task> taskArgumentCaptor;
 
     @InjectMocks
     private AppServiceImpl appService;
 
-    private final UUID userId = UUID.fromString("ce8519fd-23f5-4eb3-80f9-85e5afec6b0d");
-    private final UUID studentId = UUID.fromString("123e4567-e89b-12d3-a456-426614174002");
-    private final StudentDto studentDto = TestData.generateStudentDto();
-    private final Student student = TestData.generateStudent();
-    private final List<Student> students = List.of(student);
+    private final UUID taskId = UUID.fromString("123e4567-e89b-12d3-a456-426614174002");
+    private final TaskDto taskDto = TestData.generateTaskDto();
+    private final User user = TestData.generateUser();
+    private final User admin = TestData.generateAdmin();
+    private final Task task = TestData.generateTask();
+    private final List<Task> tasks = List.of(task);
 
     @Test
-    void createStudentSuccess() {
+    void createTaskSuccess() {
 
-        when(studentRepository.findByNameAndSecondNameAndSurname(any(), any(), any())).thenReturn(Optional.of(student));
-        when(studentMapper.toEntity(studentDto)).thenReturn(student);
-        when(studentRepository.save(any())).thenReturn(student);
+        when(taskRepository.save(any())).thenReturn(task);
+        var actualResult = appService.createTask(taskDto);
+        assertThat(actualResult.getExecutor()).isEqualTo(task.getExecutor());
 
-        var actualResult = appService.createStudent(userId, studentDto);
-        assertThat(actualResult).isEqualTo(student);
-        verify(studentMapper, times(1)).toEntity(any());
-        verify(studentRepository, times(1)).save(studentArgumentCaptor.capture());
-        var studentArgumentCaptorValue = studentArgumentCaptor.getValue();
-        assertThat(studentArgumentCaptorValue).isNotNull();
-        assertThat(studentArgumentCaptorValue).isEqualTo(student);
+        verify(taskRepository, times(1)).save(taskArgumentCaptor.capture());
+        var taskArgumentCaptorValue = taskArgumentCaptor.getValue();
+        assertThat(taskArgumentCaptorValue).isNotNull();
+        assertThat(taskArgumentCaptorValue.getAuthor()).isEqualTo(task.getAuthor());
     }
 
     @Test
-    void createStudentThrowEntityExists() {
+    void createTaskThrowEntityExists() {
 
-        when(studentRepository.findByNameAndSecondNameAndSurname(any(), any(), any())).thenThrow(new EntityExistsException(""));
+        when(taskRepository.save(any())).thenThrow(new EntityExistsException(""));
         assertThatExceptionOfType(EntityExistsException.class)
                 .isThrownBy(() -> {
-                    appService.createStudent(userId, studentDto);
+                    appService.createTask(taskDto);
                 }).withMessage("");
     }
 
     @Test
-    void getStudentsSuccess() {
+    void getTasksSuccess() {
 
-        when(studentRepository.findAll()).thenReturn(students);
+        when(taskRepository.findAll()).thenReturn(tasks);
+        //when(userRepository.findByUserStatus(any())).thenReturn(Optional.of(user));
 
-        var actualResult = appService.getStudents(userId);
+        var actualResult = appService.getTasks("ADMIN");
         assertThat(actualResult.size()).isEqualTo(1);
-        verify(studentRepository, times(1)).findAll();
+        verify(taskRepository, times(1)).findAll();
     }
 
     @Test
-    void changeStudentSuccess() {
+    void changeTaskSuccess() {
 
-        when(studentRepository.findById(any())).thenReturn(Optional.of(student));
-        when(studentRepository.save(any())).thenReturn(student);
+        when(taskRepository.findById(any())).thenReturn(Optional.of(task));
+        when(taskRepository.save(any())).thenReturn(task);
 
-        var actualResult = appService.changeStudent(userId, studentId, studentDto);        assertThat(actualResult.getName()).isEqualTo(student.getName());
-        assertThat(actualResult.getSecondName()).isEqualTo(student.getSecondName());
-        assertThat(actualResult.getSurname()).isEqualTo(student.getSurname());
-        assertThat(actualResult.getGroup()).isEqualTo(student.getGroup());
-        assertThat(actualResult.getAverageMark()).isEqualTo(student.getAverageMark());
+        var actualResult = appService.changeTask(taskId, taskDto, admin.getUserStatus().toString());
+        assertThat(actualResult.getPriority()).isEqualTo(task.getPriority());
+        assertThat(actualResult.getAuthor()).isEqualTo(task.getAuthor());
+        assertThat(actualResult.getDescription()).isEqualTo(task.getDescription());
+        assertThat(actualResult.getCommentary()).isEqualTo(task.getCommentary());
+        assertThat(actualResult.getExecutor()).isEqualTo(task.getExecutor());
 
-        verify(studentRepository, times(1)).findById(studentId);
-        verify(studentRepository, times(1)).save(studentArgumentCaptor.capture());
+        verify(taskRepository, times(1)).findById(taskId);
+        verify(taskRepository, times(1)).save(taskArgumentCaptor.capture());
 
-        var studentArgumentCaptorValue = studentArgumentCaptor.getValue();
+        var taskArgumentCaptorValue = taskArgumentCaptor.getValue();
 
-        assertThat(studentArgumentCaptorValue).isNotNull();
-        assertThat(studentArgumentCaptorValue.getName()).isEqualTo(student.getName());
-        assertThat(studentArgumentCaptorValue.getSecondName()).isEqualTo(student.getSecondName());
-        assertThat(studentArgumentCaptorValue.getSurname()).isEqualTo(student.getSurname());
-        assertThat(studentArgumentCaptorValue.getGroup()).isEqualTo(student.getGroup());
-        assertThat(studentArgumentCaptorValue.getAverageMark()).isEqualTo(student.getAverageMark());
+        assertThat(taskArgumentCaptorValue).isNotNull();
+        assertThat(taskArgumentCaptorValue.getTaskStatus()).isEqualTo(task.getTaskStatus());
+        assertThat(taskArgumentCaptorValue.getExecutor()).isEqualTo(task.getExecutor());
+        assertThat(taskArgumentCaptorValue.getTitle()).isEqualTo(task.getTitle());
+        assertThat(taskArgumentCaptorValue.getAuthor()).isEqualTo(task.getAuthor());
+        assertThat(taskArgumentCaptorValue.getDescription()).isEqualTo(task.getDescription());
     }
 
     @Test
-    void changeStudentThrowEntityNotFound() {
+    void changeTaskThrowEntityNotFound() {
 
-        when(studentRepository.findById(any())).thenThrow(new EntityNotFoundException(""));
+        when(taskRepository.findById(any())).thenThrow(new EntityNotFoundException(""));
 
         assertThatExceptionOfType(EntityNotFoundException.class)
                 .isThrownBy(() -> {
-                    appService.changeStudent(userId, studentId, studentDto);
+                    appService.changeTask(taskId, taskDto, admin.getUserStatus().toString());
                 }).withMessage("");
 
-        verify(studentRepository, times(1)).findById(studentId);
-        verify(studentRepository, times(0)).save(student);
+        verify(taskRepository, times(1)).findById(taskId);
+        verify(taskRepository, times(0)).save(task);
     }
 
     @Test
-    void deleteStudentSuccess() {
+    void deleteTaskSuccess() {
 
-        when(studentRepository.findById(any())).thenReturn(Optional.of(student));
+        when(taskRepository.findById(any())).thenReturn(Optional.of(task));
 
-        var actualResult = appService.deleteStudent(userId, studentId);
-        assertThat(actualResult).isEqualTo(studentId);
-        verify(studentRepository, times(1)).deleteById(any());
+        var actualResult = appService.deleteTask(taskId);
+        assertThat(actualResult).isEqualTo(task);
+        verify(taskRepository, times(1)).deleteById(any());
     }
 
     @Test
-    void getStudentThrowEntityNotFound() {
+    void getTaskThrowEntityNotFound() {
 
-        when(studentRepository.findById(any())).thenThrow(new EntityNotFoundException(""));
+        when(taskRepository.findById(any())).thenThrow(new EntityNotFoundException(""));
 
         assertThatExceptionOfType(EntityNotFoundException.class)
                 .isThrownBy(() -> {
-                    appService.deleteStudent(userId, studentId);
+                    appService.deleteTask(taskId);
                 }).withMessage("");
-        verify(studentRepository, times(0)).deleteById(any());
+        verify(taskRepository, times(0)).deleteById(any());
     }
 }
