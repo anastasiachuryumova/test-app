@@ -1,63 +1,89 @@
 package ru.test.service.impl;
 
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
-import ru.test.dto.StudentDto;
-import ru.test.mapper.StudentMapper;
-import ru.test.model.Student;
-import ru.test.repo.StudentRepository;
+import ru.test.dto.TaskDto;
+import ru.test.model.UserStatus;
+import ru.test.model.Task;
+import ru.test.model.User;
+import ru.test.repo.TaskRepository;
+import ru.test.repo.UserRepository;
 import ru.test.service.AppService;
-
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class AppServiceImpl implements AppService {
 
-    private final StudentRepository studentRepository;
-    private final StudentMapper studentMapper;
+    private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public List<Student> getStudents(UUID userId) {
-        return studentRepository.findAll();
+    public List<Task> getTasks(String userOrAdmin) {
+        if (userOrAdmin.equals("ADMIN")){
+            return taskRepository.findAll();
+        } else {
+            User user = userRepository.findByUserStatus(UserStatus.USER)
+                    .orElseThrow(EntityNotFoundException::new);
+            return Collections.singletonList(taskRepository.findByExecutor(user.getName())
+                    .orElseThrow(EntityNotFoundException::new));
+        }
     }
 
     @Override
-    public Student changeStudent(UUID userId, UUID studentId, StudentDto studentDto) {
-        Student student = studentRepository.findById(studentId).orElseThrow(EntityNotFoundException::new);
-        Student newStudent = Student.builder()
-                .id(student.getId())
-                .name(studentDto.getName())
-                .averageMark(studentDto.getAverageMark())
-                .secondName(studentDto.getSecondName())
-                .surname(studentDto.getSurname())
-                .group(studentDto.getGroup())
+    public Task changeTask(UUID taskId, TaskDto taskDto, String userOrAdmin) {
+        if (userOrAdmin.equals("ADMIN")){
+            Task task = taskRepository.findById(taskId).orElseThrow(EntityNotFoundException::new);
+            return getTask(taskId, taskDto, task);
+        } else {
+            User user = userRepository.findByUserStatus(UserStatus.USER)
+                    .orElseThrow(EntityNotFoundException::new);
+            Task task = taskRepository.findByIdAndExecutor(taskId, user.getName()).orElseThrow(EntityNotFoundException::new);
+            return getTask(taskId, taskDto, task);
+        }
+    }
+
+    @NotNull
+    private Task getTask(UUID taskId, TaskDto taskDto, Task task) {
+        Task newTask = Task.builder()
+                .id(task.getId())
+                .title(taskDto.getTitle())
+                .description(taskDto.getDescription())
+                .taskStatus(taskDto.getTaskStatus())
+                .priority(taskDto.getPriority())
+                .commentary(taskDto.getCommentary())
+                .author(taskDto.getAuthor())
+                .executor(taskDto.getExecutor())
                 .build();
-        studentRepository.deleteById(studentId);
-        studentRepository.save(newStudent);
-        return newStudent;
+        taskRepository.deleteById(taskId);
+        taskRepository.save(newTask);
+        return newTask;
     }
 
     @Override
-    public Student createStudent(UUID userId, StudentDto studentDto) {
-        studentRepository.findByNameAndSecondNameAndSurname(
-                studentDto.getName(),
-                studentDto.getSecondName(),
-                studentDto.getSurname())
-                .orElseThrow(EntityExistsException::new);
-        Student newStudent = studentMapper.toEntity(studentDto);
-        studentRepository.save(newStudent);
-        return newStudent;
+    public Task createTask(TaskDto taskDto) {
+        Task newTask = Task.builder()
+                .title(taskDto.getTitle())
+                .description(taskDto.getDescription())
+                .taskStatus(taskDto.getTaskStatus())
+                .priority(taskDto.getPriority())
+                .commentary(taskDto.getCommentary())
+                .author(taskDto.getAuthor())
+                .executor(taskDto.getExecutor())
+                .build();
+        taskRepository.save(newTask);
+        return newTask;
     }
 
     @Override
-    public UUID deleteStudent(UUID userId, UUID studentId) {
-        studentRepository.findById(studentId).orElseThrow(EntityNotFoundException::new);
-        studentRepository.deleteById(studentId);
-        return studentId;
+    public Task deleteTask(UUID taskId) {
+        Task taskDeleted = taskRepository.findById(taskId).orElseThrow(EntityNotFoundException::new);
+        taskRepository.deleteById(taskId);
+        return taskDeleted;
+
     }
 }

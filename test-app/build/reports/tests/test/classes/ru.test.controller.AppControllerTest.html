@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.351s</div>
+<div class="counter">0.891s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,52 +79,52 @@
 </thead>
 <tr>
 <td class="success">changeStudentSuccess()</td>
-<td class="success">1.038s</td>
+<td class="success">0.688s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">changeStudentThrowEntityNotFound()</td>
-<td class="success">0.036s</td>
+<td class="success">0.032s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">changeStudentThrowsForbidden()</td>
-<td class="success">0.028s</td>
+<td class="success">0.021s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">createStudentSuccess()</td>
-<td class="success">0.045s</td>
+<td class="success">0.022s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">createStudentThrowsForbidden()</td>
-<td class="success">0.014s</td>
+<td class="success">0.023s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">deleteStudentSuccess()</td>
-<td class="success">0.018s</td>
+<td class="success">0.022s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">deleteStudentThrowsForbidden()</td>
-<td class="success">0.031s</td>
+<td class="success">0.027s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getStudentsEmpty()</td>
-<td class="success">0.091s</td>
+<td class="success">0.022s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getStudentsSuccess()</td>
-<td class="success">0.035s</td>
+<td class="success">0.022s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getStudentsThrowsForbidden()</td>
-<td class="success">0.015s</td>
+<td class="success">0.012s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -132,8 +132,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>17:44:10.191 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [ru.test.controller.AppControllerTest]: AppControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:44:10.882 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration ru.test.NewRestTestApplication for test class ru.test.controller.AppControllerTest
+<pre>18:11:36.817 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [ru.test.controller.AppControllerTest]: AppControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:11:37.248 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration ru.test.NewRestTestApplication for test class ru.test.controller.AppControllerTest
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
@@ -143,22 +143,22 @@
 
  :: Spring Boot ::                (v3.3.0)
 
-2024-11-14T17:44:12.846+03:00  INFO 24566 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : Starting AppControllerTest using Java 17.0.8.1 with PID 24566 (started by anastasiacurumova in /Users/anastasiacurumova/Desktop/test-app)
-2024-11-14T17:44:12.849+03:00  INFO 24566 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : No active profile set, falling back to 1 default profile: &quot;dev&quot;
-2024-11-14T17:44:19.631+03:00  WARN 24566 --- [test-app] [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+2025-03-07T18:11:38.302+03:00  INFO 6769 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : Starting AppControllerTest using Java 19.0.2 with PID 6769 (started by anastasiacurumova in /Users/anastasiacurumova/Desktop/test-app/test-app)
+2025-03-07T18:11:38.306+03:00  INFO 6769 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : No active profile set, falling back to 1 default profile: &quot;dev&quot;
+2025-03-07T18:11:44.610+03:00  WARN 6769 --- [test-app] [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: c1943200-7f13-43fa-87eb-86434076e911
+Using generated security password: a78dcf5a-9748-47cb-b05e-6d2f0a722895
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2024-11-14T17:44:19.744+03:00  INFO 24566 --- [test-app] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2024-11-14T17:44:20.169+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@50f3ba6a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@319aa9ee, org.springframework.security.web.context.SecurityContextHolderFilter@18b04526, org.springframework.security.web.header.HeaderWriterFilter@1f6c4ae, org.springframework.web.filter.CorsFilter@1d806de6, org.springframework.security.web.csrf.CsrfFilter@35becbd4, org.springframework.security.web.authentication.logout.LogoutFilter@6814262d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2f6f4ac4, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@75b363c3, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@2b9d4b0, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@67c0c90b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@31b6fb14, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@246df37b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f541e67, org.springframework.security.web.access.ExceptionTranslationFilter@b34c7c9, org.springframework.security.web.access.intercept.AuthorizationFilter@6480a063]
-2024-11-14T17:44:20.212+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3006bfb, org.springframework.security.web.context.SecurityContextHolderFilter@75805562, org.springframework.security.web.header.HeaderWriterFilter@2a16d4dc, org.springframework.security.web.authentication.logout.LogoutFilter@241d1052, ru.test.filter.TokenExceptionResolvingFilter@36a58466, ru.test.filter.JwtFilter@7827d7b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@13d984ee, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4fedf908, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fd37449, org.springframework.security.web.access.ExceptionTranslationFilter@5ad0c70a, org.springframework.security.web.access.intercept.AuthorizationFilter@5bb99d1d]
-2024-11-14T17:44:20.419+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-11-14T17:44:20.419+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-11-14T17:44:20.423+03:00  INFO 24566 --- [test-app] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
-2024-11-14T17:44:20.490+03:00  INFO 24566 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : Started AppControllerTest in 9.045 seconds (process running for 14.959)
-2024-11-14T17:44:21.631+03:00  WARN 24566 --- [test-app] [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity&lt;?&gt; ru.test.controller.AppController.changeStudent(java.util.UUID,ru.test.dto.StudentDto,java.security.Principal)]
+2025-03-07T18:11:44.672+03:00  INFO 6769 --- [test-app] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-03-07T18:11:44.960+03:00  INFO 6769 --- [test-app] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2976ef56, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4345fd45, org.springframework.security.web.context.SecurityContextHolderFilter@1be3f8f8, org.springframework.security.web.header.HeaderWriterFilter@4a453f8d, org.springframework.web.filter.CorsFilter@4152bd0f, org.springframework.security.web.csrf.CsrfFilter@5503c7d, org.springframework.security.web.authentication.logout.LogoutFilter@70c31b17, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@40c28b0d, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@75805562, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@10d905c1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3cead673, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2ceb68a1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@69c33ea2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e4b54d3, org.springframework.security.web.access.ExceptionTranslationFilter@3460e4ed, org.springframework.security.web.access.intercept.AuthorizationFilter@6ae42248]
+2025-03-07T18:11:44.989+03:00  INFO 6769 --- [test-app] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2965dd88, org.springframework.security.web.context.SecurityContextHolderFilter@1255de25, org.springframework.security.web.header.HeaderWriterFilter@40738846, org.springframework.security.web.authentication.logout.LogoutFilter@38e46765, ru.test.filter.TokenExceptionResolvingFilter@5e8f0f98, ru.test.filter.JwtFilter@16fc5622, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1686ed85, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5891b7c5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3221588e, org.springframework.security.web.access.ExceptionTranslationFilter@62158991, org.springframework.security.web.access.intercept.AuthorizationFilter@4cd5fc46]
+2025-03-07T18:11:45.128+03:00  INFO 6769 --- [test-app] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-03-07T18:11:45.129+03:00  INFO 6769 --- [test-app] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-07T18:11:45.132+03:00  INFO 6769 --- [test-app] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2025-03-07T18:11:45.200+03:00  INFO 6769 --- [test-app] [    Test worker] ru.test.controller.AppControllerTest     : Started AppControllerTest in 7.727 seconds (process running for 10.399)
+2025-03-07T18:11:45.970+03:00  WARN 6769 --- [test-app] [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity&lt;?&gt; ru.test.controller.AppController.changeTask(java.util.UUID,ru.test.dto.TaskDto,java.security.Principal)]
 </pre>
 </span>
 </div>
@@ -170,7 +170,7 @@ This generated password is for development use only. Your security configuration
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.0</a> at 14 нояб. 2024 г., 17:44:22</p>
+<a href="http://www.gradle.org">Gradle 8.0</a> at 7 мар. 2025 г., 18:12:42</p>
 </div>
 </div>
 </body>

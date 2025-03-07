@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
-      file: liquibase/db/changesets/create-table-students.yaml
+      file: liquibase/db/changesets/create-table-tasks.yaml
+  - include:
+      file: liquibase/db/changesets/create-table-users.yaml
